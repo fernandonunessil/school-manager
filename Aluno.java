@@ -3,7 +3,10 @@
 
 // --- Estrutura das Classes ---
 
-public class Aluno {
+import java.util.ArrayList;
+import java.util.List;
+
+class Aluno {
     private String nome;
     private String cpf;
     private String endereco;
@@ -33,18 +36,18 @@ public class Aluno {
 
 }
 
-// class Professor {
-//     String nome;
-//     String departamento;
-//     String titulacao;
-// }
+class Professor {
+    private String nome;
+    private String departamento;
+    private String titulacao;
+}
 
-// class Turma {
-//     String codigo;
-//     String disciplina;
-//     Professor professor;
-//     List<Aluno> listaAlunos = new ArrayList<>();
-// }
+class Turma {
+    private String codigo;
+    private String disciplina;
+    private Professor professor;
+    private List<Aluno> listaAlunos = new ArrayList<>();
+}
 
 // --- Classe Principal (Executável) ---
 
