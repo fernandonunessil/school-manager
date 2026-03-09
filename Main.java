@@ -2,8 +2,26 @@ import javax.swing.JOptionPane;
 
 public class Main {
     public static void main(String[] args) {
-        Aluno aluno1 = new Aluno();
-        aluno1.setAluno("João Silva", "123.456.789-00", "Rua A, 123", "(11) 1234-5678");
-        JOptionPane.showMessageDialog(null, aluno1.getAluno());
+        Aluno alunoDataNascimentoInvalida = new Aluno("João Silva", "123.456.789-00", "Rua A, 123", "09/09/1999");
+        JOptionPane.showMessageDialog(null, alunoDataNascimentoInvalida.getAluno());
+
+        Turma turmaA = new Turma("A", EtapaDescricaoEnum.INFANTIL, 2026);
+
+        try {
+            turmaA.AdicionarAluno(alunoDataNascimentoInvalida);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        try {
+            Aluno alunoInfantil = new Aluno("Criança da Silva", "123.456.789-00", "Rua A, 123", "01/01/2024");
+            turmaA.AdicionarAluno(alunoInfantil);
+
+            JOptionPane.showMessageDialog(null,
+                    "Aluno adicionado com sucesso, quantidade de alunos da turma: " + turmaA.getNumeroMatriculados());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 }
