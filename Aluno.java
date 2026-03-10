@@ -1,59 +1,43 @@
-// import java.util.List;
-// import java.util.ArrayList;
-
-// --- Estrutura das Classes ---
-
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 class Aluno {
     private String nome;
     private String cpf;
     private String endereco;
-    private String telefone;
+    private String nascimento;
 
-
-    public void setAluno(String nome, String cpf, String endereco, String telefone) {
+    public Aluno(String nome, String cpf, String endereco, String nascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
-        this.telefone = telefone;
+        this.nascimento = nascimento;
     }
 
     public String getAluno() {
         return "Nome: " + nome + "\n" +
                 "CPF: " + cpf + "\n" +
                 "Endereço: " + endereco + "\n" +
-                "Telefone: " + telefone;
+                "Nascimento: " + nascimento;
+    }
+
+    public int getIdadeAluno() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataNascimento = LocalDate.parse(nascimento, formatter);
+        LocalDate dataAtual = LocalDate.now();
+        Period periodo = Period.between(dataNascimento, dataAtual);
+        return periodo.getYears();
+    }
+
+    public FaixaEtaria getFaixaEtariaAluno() throws Exception {
+        return new FaixaEtaria(this.getIdadeAluno());
     }
 
     public void excluirAluno() {
         this.nome = null;
         this.cpf = null;
         this.endereco = null;
-        this.telefone = null;
+        this.nascimento = null;
     }
-
 }
-
-class Professor {
-    private String nome;
-    private String departamento;
-    private String titulacao;
-}
-
-class Turma {
-    private String codigo;
-    private String disciplina;
-    private Professor professor;
-    private List<Aluno> listaAlunos = new ArrayList<>();
-}
-
-// --- Classe Principal (Executável) ---
-
-// public class SistemaEscolar {
-//     public static void main(String[] args) {
-//         // As classes acima já podem ser instanciadas aqui
-//         System.out.println("Estrutura de classes Aluno, Professor e Turma pronta!");
-//     }
-// }
