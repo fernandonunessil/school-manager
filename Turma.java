@@ -36,7 +36,7 @@ class Turma {
     }
 
     public void AdicionarAluno(Aluno aluno) throws Exception {
-        if (getNumeroMatriculados() >= this.limiteVagas + 1) {
+        if (this.limiteVagas <= 0 || getNumeroMatriculados() >= this.limiteVagas) {
             throw new Exception("A turma já possue todas as vagas preenchidas");
         }
 
