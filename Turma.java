@@ -28,14 +28,14 @@ class Turma {
         return this.listaAlunos.size();
     }
 
-    public String getAluno() {
+    public String getTurma() {
         return "Codigo " + codigo + "\n" +
                 "Etapa: " + etapa + "\n" +
                 "Ano: " + ano + "\n" +
                 "Professor: " + professor.getNome();
     }
 
-    public void AdicionarAluno(Aluno aluno) throws Exception {
+    public void adicionarAluno(Aluno aluno) throws Exception {
         if (this.limiteVagas <= 0 || getNumeroMatriculados() >= this.limiteVagas) {
             throw new Exception("A turma já possue todas as vagas preenchidas");
         }
@@ -51,5 +51,12 @@ class Turma {
 
     public void removerAluno(int index) {
         this.listaAlunos.remove(index);
+    }
+
+    @Override
+    public String toString() {
+        return "\nCódigo: " + codigo +
+               "\nEtapa: " + etapa +
+               "\nAno: " + ano;
     }
 }
