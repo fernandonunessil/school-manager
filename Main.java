@@ -21,16 +21,17 @@ public class Main {
                     + "4 - Adicionar aluno a turma\n"
                     + "5 - Remover aluno da turma\n"
                     + "6 - Mostrar turmas cadastradas\n"
-                    + "7 - Sair",
+                    + "7 - Mostrar professores cadastrados\n"
+                    + "8 - Sair",
                     "Escolha uma opção",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
                     null,
-                    new Object[]{"1", "2", "3", "4", "5", "6", "7"},
+                    new Object[]{"1", "2", "3", "4", "5", "6", "7", "8"},
                     "1"
             );
 
-            if (acaoEscolhida == 6) {
+            if (acaoEscolhida == 7) {
                 JOptionPane.showMessageDialog(null, "Saindo do sistema...");
                 exit = true;
                 break;
