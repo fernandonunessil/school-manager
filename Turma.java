@@ -29,13 +29,15 @@ class Turma {
     }
 
     public String getAluno() {
+        String nomeProfessor = this.professor == null ? "Não atribuído" : this.professor.getNome();
+
         return "Codigo " + codigo + "\n" +
                 "Etapa: " + etapa + "\n" +
                 "Ano: " + ano + "\n" +
-                "Professor: " + professor.getNome();
+                "Professor: " + nomeProfessor;
     }
 
-    public void AdicionarAluno(Aluno aluno) throws Exception {
+    public void adicionarAluno(Aluno aluno) throws Exception {
         if (getNumeroMatriculados() >= this.limiteVagas + 1) {
             throw new Exception("A turma já possue todas as vagas preenchidas");
         }
