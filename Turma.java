@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 class Turma {
     private String codigo;
     private EtapaDescricaoEnum etapa;
@@ -8,7 +5,7 @@ class Turma {
     private int limiteVagas;
 
     private Professor professor;
-    private List<Aluno> listaAlunos = new ArrayList<>();
+    private ListaDeAlunos listaAlunos = new ListaDeAlunos();
 
     public Turma(String codigo, EtapaDescricaoEnum etapa, int ano, int limiteVagas) {
         this.codigo = codigo;
@@ -26,10 +23,14 @@ class Turma {
     }
 
     public int getNumeroMatriculados() {
-        return this.listaAlunos.size();
+        return this.listaAlunos.tamanho();
     }
 
-    public List<Aluno> getAlunos() {
+    public EtapaDescricaoEnum getEtapa() {
+        return this.etapa;
+    }
+
+    public ListaDeAlunos getAlunos() {
         return listaAlunos;
     }
 
@@ -38,6 +39,10 @@ class Turma {
                 "Etapa: " + etapa + "\n" +
                 "Ano: " + ano + "\n" +
                 "Professor: " + (professor != null ? professor.getNome() : "Sem professor");
+    }
+
+    public String getCodigo() {
+        return this.codigo;
     }
 
     public void adicionarAluno(Aluno aluno) throws Exception {
@@ -50,14 +55,16 @@ class Turma {
         System.out.println(faixaEtaria);
 
         if (etapa != faixaEtaria.descricao) {
-            throw new Exception("O aluno não possui idade válida para participar dessa turma");
+            // throw new Exception("O aluno não possui idade válida para participar dessa
+            // turma");
         }
 
-        this.listaAlunos.add(aluno);
+        this.listaAlunos.incluirNoFim(aluno);
     }
 
     public void removerAluno(int index) {
-        this.listaAlunos.remove(index);
+        this.listaAlunos.removerIndex(index);
+        ;
     }
 
     @Override
