@@ -1,14 +1,13 @@
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 
 class Aluno {
     private String nome;
     private String cpf;
     private String endereco;
-    private String nascimento;
+    private LocalDate nascimento;
 
-    public Aluno(String nome, String cpf, String endereco, String nascimento) {
+    public Aluno(String nome, String cpf, String endereco, LocalDate nascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
@@ -22,11 +21,17 @@ class Aluno {
                 "Nascimento: " + nascimento;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public int getIdade() {
+        return java.time.Period.between(this.nascimento, java.time.LocalDate.now()).getYears();
+    }
+
     public int getIdadeAluno() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataNascimento = LocalDate.parse(nascimento, formatter);
         LocalDate dataAtual = LocalDate.now();
-        Period periodo = Period.between(dataNascimento, dataAtual);
+        Period periodo = Period.between(nascimento, dataAtual);
         return periodo.getYears();
     }
 
@@ -40,4 +45,5 @@ class Aluno {
         this.endereco = null;
         this.nascimento = null;
     }
+
 }

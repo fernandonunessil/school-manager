@@ -7,17 +7,17 @@ public class FaixaEtaria {
             return;
         }
 
-        if (idade >= 6 || idade < 11) {
+        if (idade >= 6 && idade < 11) {
             this.descricao = EtapaDescricaoEnum.FUNDAMENTAL_ANOS_INICIAIS;
             return;
         }
 
-        if (idade >= 11 || idade < 15) {
+        if (idade >= 11 && idade < 15) {
             this.descricao = EtapaDescricaoEnum.FUNDAMENTAL_ANOS_FINAIS;
             return;
         }
 
-        if (idade >= 15 || idade < 18) {
+        if (idade >= 15 && idade < 18) {
             this.descricao = EtapaDescricaoEnum.MEDIO;
             return;
         }

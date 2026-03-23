@@ -1,29 +1,40 @@
 import javax.swing.JOptionPane;
 
 public class Main {
+
     public static void main(String[] args) {
-        Aluno alunoDataNascimentoInvalida = new Aluno("João Silva", "123.456.789-00", "Rua A, 123", "09/09/1999");
-        JOptionPane.showMessageDialog(null, alunoDataNascimentoInvalida.getAluno());
+        Acoes sistema = new Acoes();
 
-        Turma turmaA = new Turma("A", EtapaDescricaoEnum.INFANTIL, 2026);
-        Professor professorTurmaA = new Professor("Maria Oliveira", "Pedagogia", "Especialização");
-        turmaA.setProfessor(professorTurmaA);
+        JOptionPane.showMessageDialog(null, "Bem-vindo ao sistema de gerenciamento");
 
-        try {
-            turmaA.adicionarAluno(alunoDataNascimentoInvalida);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        int acaoEscolhida;
+        boolean exit = false;
 
-        try {
-            Aluno alunoInfantil = new Aluno("Criança da Silva", "123.456.789-00", "Rua A, 123", "01/01/2024");
-            turmaA.adicionarAluno(alunoInfantil);
+        while (!exit) {
 
-            JOptionPane.showMessageDialog(null,
-                    "Aluno adicionado com sucesso, quantidade de alunos da turma: " + turmaA.getNumeroMatriculados());
+            acaoEscolhida = JOptionPane.showOptionDialog(
+                    null,
+                    "O que deseja fazer?\n\n"
+                            + "1 - Cadastrar turma\n"
+                            + "2 - Cadastrar aluno\n"
+                            + "3 - Mostrar turmas cadastradas\n"
+                            + "4 - Mostrar alunos cadastrados\n"
+                            + "5 - Mostrar alunos de uma turma\n"
+                            + "6 - Sair",
+                    "Escolha uma opção",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new Object[] { "1", "2", "3", "4", "5", "6" },
+                    "1");
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            if (acaoEscolhida == 5) {
+                JOptionPane.showMessageDialog(null, "Saindo do sistema...");
+                exit = true;
+                break;
+            }
+
+            sistema.executarAcao(acaoEscolhida);
         }
     }
 }

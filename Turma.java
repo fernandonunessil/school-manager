@@ -10,10 +10,11 @@ class Turma {
     private Professor professor;
     private List<Aluno> listaAlunos = new ArrayList<>();
 
-    public Turma(String codigo, EtapaDescricaoEnum etapa, int ano) {
+    public Turma(String codigo, EtapaDescricaoEnum etapa, int ano, int limiteVagas) {
         this.codigo = codigo;
         this.etapa = etapa;
         this.ano = ano;
+        this.limiteVagas = limiteVagas;
     }
 
     public void setProfessor(Professor professor) {
@@ -28,21 +29,25 @@ class Turma {
         return this.listaAlunos.size();
     }
 
-    public String getAluno() {
-        String nomeProfessor = this.professor == null ? "Não atribuído" : this.professor.getNome();
+    public List<Aluno> getAlunos() {
+        return listaAlunos;
+    }
 
+    public String getTurma() {
         return "Codigo " + codigo + "\n" +
                 "Etapa: " + etapa + "\n" +
                 "Ano: " + ano + "\n" +
-                "Professor: " + nomeProfessor;
+                "Professor: " + (professor != null ? professor.getNome() : "Sem professor");
     }
 
     public void adicionarAluno(Aluno aluno) throws Exception {
-        if (getNumeroMatriculados() >= this.limiteVagas + 1) {
+        if (this.limiteVagas <= 0 || getNumeroMatriculados() >= this.limiteVagas) {
             throw new Exception("A turma já possue todas as vagas preenchidas");
         }
 
         FaixaEtaria faixaEtaria = aluno.getFaixaEtariaAluno();
+
+        System.out.println(faixaEtaria);
 
         if (etapa != faixaEtaria.descricao) {
             throw new Exception("O aluno não possui idade válida para participar dessa turma");
@@ -53,5 +58,15 @@ class Turma {
 
     public void removerAluno(int index) {
         this.listaAlunos.remove(index);
+    }
+
+    @Override
+    public String toString() {
+        return "----------------------\n" +
+                "Código: " + codigo + "\n" +
+                "Etapa : " + etapa + "\n" +
+                "Ano   : " + ano + "\n" +
+                "Limite   : " + limiteVagas + "\n" +
+                "----------------------";
     }
 }
