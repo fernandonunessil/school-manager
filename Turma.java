@@ -10,10 +10,11 @@ class Turma {
     private Professor professor;
     private List<Aluno> listaAlunos = new ArrayList<>();
 
-    public Turma(String codigo, EtapaDescricaoEnum etapa, int ano) {
+    public Turma(String codigo, EtapaDescricaoEnum etapa, int ano, int limiteVagas) {
         this.codigo = codigo;
         this.etapa = etapa;
         this.ano = ano;
+        this.limiteVagas = limiteVagas;
     }
 
     public void setProfessor(Professor professor) {
@@ -28,11 +29,15 @@ class Turma {
         return this.listaAlunos.size();
     }
 
+    public List<Aluno> getAlunos() {
+        return listaAlunos;
+    }
+
     public String getTurma() {
         return "Codigo " + codigo + "\n" +
                 "Etapa: " + etapa + "\n" +
                 "Ano: " + ano + "\n" +
-                "Professor: " + professor.getNome();
+                "Professor: " + (professor != null ? professor.getNome() : "Sem professor");
     }
 
     public void adicionarAluno(Aluno aluno) throws Exception {
@@ -41,6 +46,8 @@ class Turma {
         }
 
         FaixaEtaria faixaEtaria = aluno.getFaixaEtariaAluno();
+
+        System.out.println(faixaEtaria);
 
         if (etapa != faixaEtaria.descricao) {
             throw new Exception("O aluno não possui idade válida para participar dessa turma");
@@ -55,8 +62,11 @@ class Turma {
 
     @Override
     public String toString() {
-        return "\nCódigo: " + codigo +
-               "\nEtapa: " + etapa +
-               "\nAno: " + ano;
+        return "----------------------\n" +
+                "Código: " + codigo + "\n" +
+                "Etapa : " + etapa + "\n" +
+                "Ano   : " + ano + "\n" +
+                "Limite   : " + limiteVagas + "\n" +
+                "----------------------";
     }
 }

@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         Acoes sistema = new Acoes();
-        
+
         JOptionPane.showMessageDialog(null, "Bem-vindo ao sistema de gerenciamento");
 
         int acaoEscolhida;
@@ -15,23 +15,20 @@ public class Main {
             acaoEscolhida = JOptionPane.showOptionDialog(
                     null,
                     "O que deseja fazer?\n\n"
-                    + "1 - Cadastrar turma\n"
-                    + "2 - Cadastrar professor\n"
-                    + "3 - Cadastrar aluno\n"
-                    + "4 - Adicionar aluno a turma\n"
-                    + "5 - Remover aluno da turma\n"
-                    + "6 - Mostrar turmas cadastradas\n"
-                    + "7 - Mostrar professores cadastrados\n"
-                    + "8 - Sair",
+                            + "1 - Cadastrar turma\n"
+                            + "2 - Cadastrar aluno\n"
+                            + "3 - Mostrar turmas cadastradas\n"
+                            + "4 - Mostrar alunos cadastrados\n"
+                            + "5 - Mostrar alunos de uma turma\n"
+                            + "6 - Sair",
                     "Escolha uma opção",
                     JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
                     null,
-                    new Object[]{"1", "2", "3", "4", "5", "6", "7", "8"},
-                    "1"
-            );
+                    new Object[] { "1", "2", "3", "4", "5", "6" },
+                    "1");
 
-            if (acaoEscolhida == 7) {
+            if (acaoEscolhida == 5) {
                 JOptionPane.showMessageDialog(null, "Saindo do sistema...");
                 exit = true;
                 break;
