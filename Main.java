@@ -29,7 +29,7 @@ public class Main {
                     new Object[] { "1", "2", "3", "4", "5", "6", "7" },
                     "1");
 
-            if (acaoEscolhida == 7) {
+            if (acaoEscolhida == 6) {
                 JOptionPane.showMessageDialog(null, "Saindo do sistema...");
                 exit = true;
                 break;
