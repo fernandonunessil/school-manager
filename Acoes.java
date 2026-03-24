@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class Acoes {
     private ArrayList<Turma> turmas = new ArrayList<Turma>();
     // private ArrayList<Professor> professores = new ArrayList<Professor>();
-    private ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+    private ListaDeAlunos alunos = new ListaDeAlunos();
 
     public void executarAcao(int acao) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -70,7 +70,7 @@ public class Acoes {
 
                 try {
                     turmaSelecionada.adicionarAluno(aluno);
-                    alunos.add(aluno);
+                    alunos.incluirNoFim(aluno);
                     JOptionPane.showMessageDialog(null, "Aluno cadastrado e matriculado com sucesso!");
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao matricular: " + e.getMessage());
@@ -85,29 +85,17 @@ public class Acoes {
                 JOptionPane.showMessageDialog(null, turmas.toString());
                 break;
             case 3:
-                if (alunos.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Nenhuma turma cadastrada");
+                if (turmas.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Nenhum aluno cadastrado");
                     break;
-                }
-                String orderALUNOS = (String) JOptionPane.showInputDialog(
-                        null,
-                        "Ordenar por (Nome) ou (Idade): ",
-                        "Ordem:",
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        new String[] { "Nome", "Idade" },
-                        "Nome");
-                ArrayList<Aluno> listaOrdenada = new ArrayList<>(alunos);
-                if (orderALUNOS.equals("Nome")) {
-                    listaOrdenada.sort(java.util.Comparator.comparing(Aluno::getNome));
-                } else {
-                    listaOrdenada.sort(java.util.Comparator.comparing(Aluno::getIdade));
                 }
 
                 StringBuilder resultado = new StringBuilder();
+                alunos.ordenar();
 
-                for (Aluno a : listaOrdenada) {
-                    resultado.append(a.getNome())
+                for (Aluno a : alunos.getListaAlunos()) {
+                    resultado.append(
+                            a.getNome())
                             .append(" - ")
                             .append(a.getIdade())
                             .append("\n");
@@ -141,15 +129,15 @@ public class Acoes {
                 int index = java.util.Arrays.asList(opcoesTurmasLista).indexOf(turmaEscolhida);
                 Turma turmaSelecionadaLista = turmas.get(index);
 
-                if (turmaSelecionadaLista.getAlunos().isEmpty()) {
+                if (turmaSelecionadaLista.getAlunos().tamanho() == 0) {
                     JOptionPane.showMessageDialog(null, "Nenhum aluno cadastrado nessa turma");
                 } else {
                     StringBuilder lista = new StringBuilder();
 
                     lista.append("Alunos da turma:\n\n");
 
-                    for (Aluno a : turmaSelecionadaLista.getAlunos()) {
-                        lista.append(a.getAluno()) // você já criou esse método 👍
+                    for (Aluno a : turmaSelecionadaLista.getAlunos().getListaAlunos()) {
+                        lista.append(a.getAluno())
                                 .append("\n-------------------\n");
                     }
 
@@ -157,7 +145,30 @@ public class Acoes {
                 }
 
                 break;
+            case 5:
+                // listagem de alunos fora da faxa etaria
+                StringBuilder resultadoChecagem = new StringBuilder();
 
+                for (Turma turmaChecagem : turmas) {
+                    for (Aluno alunoChecagem : turmaChecagem.getAlunos().getListaAlunos()) {
+                        try {
+                            if (turmaChecagem.getEtapa() != alunoChecagem.getFaixaEtariaAluno().descricao) {
+                                resultadoChecagem.append("aluno " +
+                                        alunoChecagem.getNome() +
+                                        " tem etapa " +
+                                        alunoChecagem.getFaixaEtariaAluno().descricao +
+                                        " mas esta cadastrado na turma " + turmaChecagem.getCodigo() +
+                                        " que é da faixa etaria " + turmaChecagem.getEtapa())
+                                        .append("\n");
+                            }
+                        } catch (Exception e) {
+
+                        }
+
+                    }
+                }
+
+                JOptionPane.showMessageDialog(null, resultadoChecagem.toString());
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida");
         }
