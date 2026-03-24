@@ -169,6 +169,7 @@ public class Acoes {
                 }
 
                 JOptionPane.showMessageDialog(null, resultadoChecagem.toString());
+                break;
             default:
                 JOptionPane.showMessageDialog(null, "Opção inválida");
         }
