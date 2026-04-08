@@ -25,6 +25,10 @@ public class Acoes {
                         .parseInt(JOptionPane.showInputDialog(null, "Informe o limite de vagas dessa turma:"));
                 EtapaDescricaoEnum etapaEnum = EtapaDescricaoEnum.valueOf(etapa);
                 Turma turma = new Turma(codTurma, etapaEnum, ano, limiteVagas);
+                if (turmas.contains(turma)) {
+                    JOptionPane.showMessageDialog(null, "Uma turma com este código já foi cadastrada!");
+                    break;
+                }
                 turmas.add(turma);
                 JOptionPane.showMessageDialog(null, "Turma cadastrada com sucesso!");
                 break;
@@ -51,6 +55,11 @@ public class Acoes {
                 }
 
                 Aluno aluno = new Aluno(nomeAluno, cpfAluno, enderecoAluno, nascimentoAluno);
+
+                if (alunos.getListaAlunos().contains(aluno)) {
+                    JOptionPane.showMessageDialog(null, "Este aluno já está cadastrado no sistema!");
+                    break;
+                }
 
                 String[] opcoesTurmas = turmas.stream()
                         .map(t -> t.toString().replace("\n", " | "))
@@ -94,11 +103,7 @@ public class Acoes {
                 alunos.ordenar();
 
                 for (Aluno a : alunos.getListaAlunos()) {
-                    resultado.append(
-                            a.getNome())
-                            .append(" - ")
-                            .append(a.getIdade())
-                            .append("\n");
+                    resultado.append(a.toString()).append("\n");
                 }
 
                 JOptionPane.showMessageDialog(null, resultado.toString());
@@ -137,7 +142,7 @@ public class Acoes {
                     lista.append("Alunos da turma:\n\n");
 
                     for (Aluno a : turmaSelecionadaLista.getAlunos().getListaAlunos()) {
-                        lista.append(a.getAluno())
+                        lista.append(a.toString())
                                 .append("\n-------------------\n");
                     }
 
