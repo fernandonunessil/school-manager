@@ -76,4 +76,12 @@ class Turma {
                 "Limite   : " + limiteVagas + "\n" +
                 "----------------------";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Turma outra = (Turma) obj;
+        return this.codigo != null && this.codigo.equals(outra.codigo);
+    }
 }
