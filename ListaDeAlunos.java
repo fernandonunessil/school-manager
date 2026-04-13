@@ -5,11 +5,17 @@ import java.util.List;
 public class ListaDeAlunos {
     private List<Aluno> listaAlunos = new ArrayList<>();
 
-    public void incluirNoInicio(Aluno aluno) {
-        this.listaAlunos.addFirst(aluno);
+    public void incluirNoInicio(Aluno aluno) throws ExcecaoDeAlunoJaExistente {
+        if (this.listaAlunos.contains(aluno)) {
+            throw new ExcecaoDeAlunoJaExistente();
+        }
+        this.listaAlunos.add(0, aluno);
     }
 
-    public void incluirNoFim(Aluno aluno) {
+    public void incluirNoFim(Aluno aluno) throws ExcecaoDeAlunoJaExistente {
+        if (this.listaAlunos.contains(aluno)) {
+            throw new ExcecaoDeAlunoJaExistente();
+        }
         this.listaAlunos.add(aluno);
     }
 
@@ -18,7 +24,7 @@ public class ListaDeAlunos {
     }
 
     public Aluno removerDoFim() {
-        return this.listaAlunos.removeLast();
+        return this.listaAlunos.remove(this.listaAlunos.size() - 1);
     }
 
     public void removerIndex(int index) {

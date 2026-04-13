@@ -56,11 +56,6 @@ public class Acoes {
 
                 Aluno aluno = new Aluno(nomeAluno, cpfAluno, enderecoAluno, nascimentoAluno);
 
-                if (alunos.getListaAlunos().contains(aluno)) {
-                    JOptionPane.showMessageDialog(null, "Este aluno já está cadastrado no sistema!");
-                    break;
-                }
-
                 String[] opcoesTurmas = turmas.stream()
                         .map(t -> t.toString().replace("\n", " | "))
                         .toArray(String[]::new);
@@ -78,10 +73,15 @@ public class Acoes {
                 Turma turmaSelecionada = turmas.get(indexTurma);
 
                 try {
-                    turmaSelecionada.adicionarAluno(aluno);
                     alunos.incluirNoFim(aluno);
+                    turmaSelecionada.adicionarAluno(aluno);
                     JOptionPane.showMessageDialog(null, "Aluno cadastrado e matriculado com sucesso!");
+                } catch (ExcecaoDeAlunoJaExistente e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 } catch (Exception e) {
+                    if (alunos.tamanho() > 0 && alunos.get(alunos.tamanho() - 1).equals(aluno)) {
+                        alunos.removerDoFim();
+                    }
                     JOptionPane.showMessageDialog(null, "Erro ao matricular: " + e.getMessage());
                 }
 
