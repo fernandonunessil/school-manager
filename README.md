@@ -1,62 +1,126 @@
-# 🏫 Projeto Integrador - Sistema de Gestão Escolar (Etapa 1)
+# 🏫 Projeto Integrador - Sistema de Gestão Escolar (Etapa 1 e 2)
 
-Este é um sistema computacional interativo via console, desenvolvido como parte da primeira etapa do Projeto Integrador. O objetivo principal é aplicar os conceitos de **Programação Orientada a Objetos (POO)** e **Estruturas de Dados** na construção de uma ferramenta para apoiar a organização e gestão de uma escola.
+Este é um sistema computacional interativo via console, desenvolvido como parte do Projeto Integrador. O objetivo principal é aplicar os conceitos de **Programação Orientada a Objetos (POO)**, **Estruturas de Dados** e **Tratamento de Exceções**, construindo uma ferramenta para apoiar a organização e gestão de uma escola.
 
 ---
 
-## 📄 Relatório de Desenvolvimento (Etapa 1)
+## 📄 Relatório de Desenvolvimento
 
+### 🔹 Etapa 1
 
-### 1. Como o grupo se organizou e Metodologia de Trabalho
+### 1. Organização do Grupo e Metodologia
 
-Para garantir uma entrega de qualidade e simular um ambiente de mercado real, adotamos uma abordagem colaborativa fortemente baseada em controle de versão:
+Para garantir uma entrega de qualidade e simular um ambiente de desenvolvimento real, adotamos uma abordagem colaborativa:
 
-* **Repositório Compartilhado:** Centralizamos o projeto no GitHub, com acesso para todos os membros da equipe, garantindo transparência e acompanhamento do progresso em tempo real.
+- **Repositório Compartilhado:** Utilização do GitHub para centralizar o projeto e acompanhar o progresso.
+- **Divisão de Tarefas:** O sistema foi dividido em módulos, com cada integrante responsável por uma parte.
+- **Pull Requests (PRs):** Todo código foi revisado antes de entrar na branch principal, garantindo qualidade e padronização.
 
-* **Divisão de Tarefas:** O escopo do projeto foi modularizado. Cada integrante ficou responsável por programar uma funcionalidade específica.
-
-* **Fluxo de Pull Requests (PRs):** Estabelecemos a regra de que nenhum código iria direto para a *branch* principal (`main`). Cada desenvolvedor trabalhou em *branches* isoladas. Após finalizar a tarefa, o responsável abria um *Pull Request*, e o código só era integrado ao projeto principal após a revisão e aprovação dos demais membros. Isso evitou conflitos estruturais e garantiu a aderência ao modelo de objetos.
-
+---
 
 ### 2. Dificuldades Encontradas
-Durante a implementação, lidamos com desafios lógicos e estruturais, destacando-se:
-* **Cálculo Dinâmico e Preciso da Idade:** Subtrair apenas o ano de nascimento do ano atual gera inconsistências. Precisávamos de uma forma de calcular a idade exata considerando meses, dias e anos bissextos para enquadrar o aluno na etapa correta.
-* **Implementação da `ListaDeAlunos`:** Construir uma estrutura de dados do zero foi o maior desafio. O método `ordenar()` exigiu a criação de um algoritmo de ordenação manual para classificar os alunos em ordem alfabética sem corromper a estrutura.
-* **Validações e Exceções:** Garantir a integridade dos dados (como impedir que uma turma ultrapasse o limite de vagas) sem poluir a interface do usuário com regras de negócio.
 
-
-### 3. Soluções Propostas e Arquitetura
-
-* **Manipulação de Datas (Java API):** Utilizamos as classes nativas `java.time.LocalDate` e `java.time.Period`. O cálculo exato foi resolvido encapsulando a lógica com `Period.between(nascimento, dataAtual).getYears()`, garantindo 100% de precisão na idade.
-* **Boas Práticas de POO (Enums e Responsabilidade Única):** Para evitar erros de digitação e padronizar o sistema, criamos o `EtapaDescricaoEnum` (Infantil, Fundamental, Médio). Além disso, criamos uma classe dedicada `FaixaEtaria` com a única responsabilidade de converter a idade inteira para a etapa correspondente do Enum.
-* **Encapsulamento de Regras de Negócio:** As validações foram inseridas dentro das próprias entidades. Por exemplo, a classe `Turma` gerencia sua própria lista (`ArrayList` nativo) e lança uma `Exception` customizada caso tente matricular um aluno além do limite de vagas, protegendo a integridade da memória.
-* **Ordenação Customizada:** Na classe `ListaDeAlunos`, implementamos o algoritmo [INSERIR AQUI QUAL SORT VOCÊS USARAM: ex: Bubble Sort / Insertion Sort] utilizando o método `compareTo` das Strings para ordenar os nomes alfabeticamente.
-
-## ⚙️ Funcionalidades do Sistema
-
-O sistema roda inteiramente na memória e possui as seguintes funcionalidades acessíveis via console:
-* **Cadastro de Alunos:** Inserção de nome, CPF, endereço e data de nascimento.
-* **Cadastro de Turmas:** Registro informando código, etapa de ensino, ano e limite de vagas.
-* **Matrícula:** Inclusão de um aluno em uma turma específica (com validação de vagas e emissão de alertas de faixa etária).
-* **Consultas:**
-  * Listagem de alunos da escola em **ordem alfabética**.
-  * Listagem de turmas e alunos matriculados por turma.
-  * Relatório de alunos matriculados em uma etapa fora da faixa de idade prevista.
-
-  ## 🚀 Tecnologias e Execução
-
-* **Linguagem:** Java
-* **Paradigma:** Orientação a Objetos
-* **Interface:** Console / Terminal
-
-**Como executar localmente:**
-1. Clone o repositório: `git clone https://github.com/fernandonunessil/school-manager.git`
-2. Abra o projeto na sua IDE de preferência.
-3. Execute a classe principal (`Main.java`) e interaja com o menu pelo Console..
+- Cálculo preciso da idade considerando datas completas.
+- Implementação da estrutura `ListaDeAlunos` do zero.
+- Criação de algoritmo de ordenação para listagem alfabética.
+- Aplicação de validações sem comprometer a organização do código.
 
 ---
-**Desenvolvido por:**
-* Felipe Bock Magagnin
-* Neytan Belisário
-* Karen Novaes Domschke
-* Fernando Nunes da Silva
+
+### 3. Soluções e Arquitetura
+
+- Uso de `LocalDate` e `Period` para cálculo correto de idade.
+- Criação de `Enum` para padronizar etapas de ensino.
+- Classe `FaixaEtaria` para centralizar regras de idade.
+- Implementação de ordenação com algoritmo manual.
+- Encapsulamento das regras dentro das próprias classes.
+
+---
+
+## 🔹 Etapa 2
+
+### 1. Sobrescrita de Métodos
+
+Foram sobrescritos os métodos `toString()` e `equals()` nas classes **Aluno** e **Turma**:
+
+- **toString():**
+  - Passa a retornar uma representação clara do objeto.
+  - Facilita a exibição de dados no sistema.
+
+- **equals():**
+  - Permite comparar objetos com base em seus atributos.
+  - Utilizado para verificar igualdade lógica entre alunos e turmas.
+
+---
+
+### 2. Tratamento de Exceções
+
+Foi implementado tratamento de exceções para garantir maior robustez:
+
+- Criação da exceção personalizada:
+  - `ExcecaoDeAlunoJaExistente`
+
+- Regra:
+  - Ao tentar inserir um aluno duplicado, a exceção é lançada.
+
+- Aplicação:
+  - Uso de blocos `try-catch` para tratamento seguro de erros.
+
+---
+
+## ⚙️ Funcionalidades
+
+- Cadastro de alunos
+- Cadastro de turmas
+- Matrícula de alunos
+- Validação de limite de vagas
+- Listagem de alunos em ordem alfabética
+- Listagem de turmas e alunos matriculados
+- Relatórios de inconsistência de faixa etária
+
+---
+
+## 🧠 Considerações Finais
+
+O desenvolvimento deste projeto permitiu consolidar, na prática, conceitos fundamentais da programação orientada a objetos.
+
+Na primeira etapa, o foco foi estruturar o sistema, organizar as classes e implementar regras de negócio de forma consistente. Já na segunda etapa, houve um avanço significativo na qualidade do software, com a introdução de sobrescrita de métodos e tratamento de exceções.
+
+A sobrescrita do método `toString()` melhorou a forma de apresentação dos dados, enquanto o método `equals()` possibilitou comparações mais precisas entre objetos, sendo essencial para validações como a verificação de duplicidade de alunos.
+
+A implementação da exceção `ExcecaoDeAlunoJaExistente` aumentou a robustez do sistema, permitindo tratar erros de forma controlada e evitando inconsistências nos dados.
+
+As principais dificuldades encontradas foram:
+- Implementar corretamente o método `equals()`.
+- Definir onde lançar e tratar exceções.
+- Integrar as novas funcionalidades sem quebrar a estrutura existente.
+
+De forma geral, o projeto contribuiu para o desenvolvimento de boas práticas como encapsulamento, organização de código, reutilização e tratamento de erros, além de simular um ambiente real de desenvolvimento com versionamento e trabalho em equipe.
+
+---
+
+## 🚀 Tecnologias
+
+- Linguagem: Java  
+- Paradigma: Programação Orientada a Objetos  
+- Interface: Console  
+
+---
+
+## ▶️ Como Executar
+
+1. Clone o repositório: git clone https://github.com/fernandonunessil/school-manager.git
+
+
+2. Abra na sua IDE (NetBeans, IntelliJ, Eclipse, etc.)
+
+3. Execute a classe `Main.java`
+
+---
+
+## 👨‍💻 Desenvolvido por
+
+- Felipe Bock Magagnin  
+- Neytan Belisário  
+- Karen Novaes Domschke  
+- Fernando Nunes da Silva  
